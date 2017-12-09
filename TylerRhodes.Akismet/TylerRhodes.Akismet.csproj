@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.0.0-alpha</Version>
+    <Authors>Tyler Rhodes</Authors>
+    <Company>Tyler Rhodes</Company>
+    <Description>Akismet Client for detecting comment spam</Description>
+    <PackageLicenseUrl>https://github.com/tylerlrhodes/AkismetClient/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/tylerlrhodes/AkismetClient</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tylerlrhodes/AkismetClient</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>This is an alpha release</PackageReleaseNotes>
+    <Copyright>Copyright 2017</Copyright>
   </PropertyGroup>
 
 </Project>

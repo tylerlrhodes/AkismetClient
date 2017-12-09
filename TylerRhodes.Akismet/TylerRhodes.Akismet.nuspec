@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>TylerRhodes.AkismetClient</id>
+    <version>1.0.0-alpha</version>
+    <title>Akismet Client for C#</title>
+    <authors>Tyler Rhodes</authors>
+    <owners>Tyler Rhodes</owners>
+    <licenseUrl>https://github.com/tylerlrhodes/AkismetClient/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/tylerlrhodes/AkismetClient</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Akismet client</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Akismet C#</tags>
+  </metadata>
+</package>
