@@ -7,25 +7,67 @@ using System.Web;
 
 namespace TylerRhodes.Akismet
 {
+  /// <summary>
+  /// Akismet client for interfacing with Akismet public anti-spam API over http
+  /// </summary>
   public class AkismetClient
   {
+    /// <summary>
+    /// HttpClient to use, submitted through constructor
+    /// </summary>
     private readonly HttpClient _httpClient;
 
+    /// <summary>
+    /// Akismet Key Verification url
+    /// </summary>
     private const string KeyVerificationUrl = "https://rest.akismet.com/1.1/verify-key";
-    private readonly Uri _keyVerificationUrl = new Uri(KeyVerificationUrl);
+    /// <summary>
+    /// Akismet key verification uri
+    /// </summary>
+    private readonly Uri _keyVerificationUri = new Uri(KeyVerificationUrl);
 
+    /// <summary>
+    /// Akismet comment check url format string
+    /// </summary>
     private const string CommentCheckUrlFormat = "https://{0}.rest.akismet.com/1.1/comment-check";
+    /// <summary>
+    /// Akistmet comment check uri
+    /// </summary>
     private Uri _commentCheckUri;
 
+    /// <summary>
+    /// Akismet Submit Spam url format string
+    /// </summary>
     private const string SubmitSpamUrlFormat = "https://{0}.rest.akismet.com/1.1/submit-spam";
+    /// <summary>
+    /// Akismet submit spam uri
+    /// </summary>
     private Uri _submitSpamUri;
 
+    /// <summary>
+    /// Akismet Submit Ham url format string
+    /// </summary>
     private const string SubmitHamUrlFormat = "https://{0}.rest.akismet.com/1.1/submit-ham";
+    /// <summary>
+    /// Akismet submit ham uri
+    /// </summary>
     private Uri _submitHamUri;
 
+    /// <summary>
+    /// blog url
+    /// </summary>
     public readonly string BlogUrl;
+    /// <summary>
+    /// api key
+    /// </summary>
     public readonly string ApiKey;
 
+    /// <summary>
+    /// AkismetClient constructor
+    /// </summary>
+    /// <param name="blogUrl">URL of blog</param>
+    /// <param name="apiKey">Akismet API Key</param>
+    /// <param name="httpClient">HttpClient to use</param>
     public AkismetClient(string blogUrl, string apiKey, HttpClient httpClient)
     {
       BlogUrl = blogUrl ?? throw new ArgumentNullException(nameof(blogUrl));
@@ -36,6 +78,9 @@ namespace TylerRhodes.Akismet
       GenerateUris();
     }
 
+    /// <summary>
+    /// Generates URIs for use by AkismetClient
+    /// </summary>
     private void GenerateUris()
     {
       _commentCheckUri = new Uri(string.Format(CommentCheckUrlFormat, ApiKey));
@@ -43,6 +88,10 @@ namespace TylerRhodes.Akismet
       _submitHamUri = new Uri(string.Format(SubmitHamUrlFormat, ApiKey));
     }
 
+    /// <summary>
+    /// Verifies API Key
+    /// </summary>
+    /// <returns>true for valid key</returns>
     public async Task<bool> CheckApiKey()
     {
       var parameters = new Dictionary<string, string>
@@ -53,28 +102,49 @@ namespace TylerRhodes.Akismet
 
       var content = new FormUrlEncodedContent(parameters);
 
-      var httpResponseMessage = await _httpClient.PostAsync(_keyVerificationUrl, content);
+      var httpResponseMessage = await _httpClient.PostAsync(_keyVerificationUri, content).ConfigureAwait(false);
 
-      var result = await httpResponseMessage.Content.ReadAsStringAsync();
+      var result = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
       return result == "valid";
     }
 
+    /// <summary>
+    /// Submits a comment as spam to Akismet
+    /// </summary>
+    /// <param name="comment">Spam comment to submit</param>
+    /// <returns></returns>
     public async Task SubmitSpam(AkismetComment comment)
     {
-      await Submit(comment, _submitSpamUri);
+      await Submit(comment, _submitSpamUri).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// Submits a comment as ham to Akismet
+    /// </summary>
+    /// <param name="comment">Comment to submit as ham</param>
+    /// <returns></returns>
     public async Task SubmitHam(AkismetComment comment)
     {
-      await Submit(comment, _submitHamUri);
+      await Submit(comment, _submitHamUri).ConfigureAwait(false);
     }
 
+    /// <summary>
+    /// Checks a comment against Akismet to see if it is spam
+    /// </summary>
+    /// <param name="comment">Comment to check</param>
+    /// <returns>true if comment is spam</returns>
     public async Task<bool> IsCommentSpam(AkismetComment comment)
     {
-      return await Submit(comment, _commentCheckUri) == "true";
+      return await Submit(comment, _commentCheckUri).ConfigureAwait(false) == "true";
     }
 
+    /// <summary>
+    /// Submits a comment to the given URI
+    /// </summary>
+    /// <param name="comment">Comment to submit</param>
+    /// <param name="uri">URI to submit to</param>
+    /// <returns>string of response</returns>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
     private async Task<string> Submit(AkismetComment comment, Uri uri)
     {
@@ -117,9 +187,9 @@ namespace TylerRhodes.Akismet
 
       var content = new FormUrlEncodedContent(parameters);
 
-      var httpResponseMessage = await _httpClient.PostAsync(uri, content);
+      var httpResponseMessage = await _httpClient.PostAsync(uri, content).ConfigureAwait(false);
 
-      var result = await httpResponseMessage.Content.ReadAsStringAsync();
+      var result = await httpResponseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
 
       return result;
     }
