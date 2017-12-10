@@ -18,7 +18,7 @@ You can get your key at [Akismet For Developers.](https://akismet.com/developmen
 
 Using the client is as simple as the code shown below:
 
-```
+```C#
 
 using (var client = new HttpClient())
 {
