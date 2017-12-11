@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TylerRhodes.Akismet", "TylerRhodes.Akismet\TylerRhodes.Akismet.csproj", "{1DDB0C76-90EF-4C50-BEFA-EAE78F1416D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TylerRhodes.Akismet.Test", "TylerRhodes.Akismet.Test\TylerRhodes.Akismet.Test.csproj", "{47F439EA-E8D0-4E71-AA78-692ADA88BA2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1DDB0C76-90EF-4C50-BEFA-EAE78F1416D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DDB0C76-90EF-4C50-BEFA-EAE78F1416D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DDB0C76-90EF-4C50-BEFA-EAE78F1416D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F439EA-E8D0-4E71-AA78-692ADA88BA2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F439EA-E8D0-4E71-AA78-692ADA88BA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F439EA-E8D0-4E71-AA78-692ADA88BA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F439EA-E8D0-4E71-AA78-692ADA88BA2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
